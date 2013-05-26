@@ -22,7 +22,7 @@ public class HibernateTests {
 
         Foo foo = new Foo();
         foo.setName("harun");
-        foo.setId(1L);
+        //foo.setId(1L); // @GeneratedValue annotaioni olunca gerek yok
         session.save(foo);
 
         transaction.commit();
