@@ -13,6 +13,11 @@ import javax.persistence.*;
 @Table(name="T_FOO")
 public class Foo {
 
+    @Column(name="C_NAME")
+    private String name;
+
+    private Bar bar;
+
     public Foo() {
 
     }
@@ -20,9 +25,6 @@ public class Foo {
     public Foo(String name) {
         this.name = name;
     }
-
-    @Column(name="C_NAME")
-    private String name;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
