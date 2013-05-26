@@ -12,6 +12,9 @@
   	    <property name="hibernate.cache.use_query_cache">false</property>
 
         <mapping class="com.gg.hibernate.model.Foo" />
+        <mapping class="com.gg.hibernate.model.Owner" />
+        <mapping class="com.gg.hibernate.model.Visit" />
+        <mapping class="com.gg.hibernate.model.Pet" />
 
     </session-factory>
 </hibernate-configuration>

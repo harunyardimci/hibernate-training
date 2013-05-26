@@ -1,11 +1,15 @@
 package com.gg.hibernate.model;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
+@Embeddable
 public class Image implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	
+
+    @Column(name = "FILENAME")
 	private String filename;
 	
 	private int width;
