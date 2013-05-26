@@ -20,9 +20,9 @@ public class HibernateTests {
         Transaction transaction = session.getTransaction();
         transaction.begin();
 
-        Foo foo = new Foo();
-        foo.setName("harun");
-        //foo.setId(1L); // @GeneratedValue annotaioni olunca gerek yok
+        Foo foo = new Foo("harun");
+        //foo.setName("harun");
+        //foo.setId(1L); // @GeneratedValue annotaion'i olunca gerek yok
         session.save(foo);
 
         transaction.commit();

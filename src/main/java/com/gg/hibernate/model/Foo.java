@@ -1,10 +1,7 @@
 package com.gg.hibernate.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * User: { "id": "hyardimci", "email":nosqlsolutions@gmail.com"}
@@ -12,10 +9,19 @@ import javax.persistence.Id;
  * Time: 11:43 AM
  */
 
-@Entity
+@Entity(name="foobar")
+@Table(name="T_FOO")
 public class Foo {
 
+    public Foo() {
 
+    }
+
+    public Foo(String name) {
+        this.name = name;
+    }
+
+    @Column(name="C_NAME")
     private String name;
 
     @Id
@@ -27,16 +33,8 @@ public class Foo {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public Long getId() {
         return id;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
 }
