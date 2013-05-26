@@ -27,6 +27,7 @@ public class Pet extends BaseEntity {
 
 	private PetType type;
 
+    @ManyToOne
 	private Owner owner;
 
     @Transient
@@ -36,7 +37,6 @@ public class Pet extends BaseEntity {
     @MapKeyColumn
 	private Map<String,Image> imagesByName = new HashMap<String, Image>();
 
-	
 	public String getName() {
 		return name;
 	}
