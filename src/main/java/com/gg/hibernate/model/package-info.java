@@ -1,0 +1,1 @@
+package com.gg.hibernate.model;
