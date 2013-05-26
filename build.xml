@@ -11,6 +11,7 @@
 	
 	<target name="db.run.server" description="Start H2 DB Server">
 		<java classname="org.h2.tools.Console" fork="yes" classpathref="build.classpath" failonerror="true">
+            <arg line="-webAllowOthers"/>
 		</java>
 	</target>
 </project>
