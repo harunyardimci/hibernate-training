@@ -3,6 +3,7 @@ package com.gg.hibernate;
 import com.gg.hibernate.dao.HibernateUtils;
 import com.gg.hibernate.dao.PetClinicDaoHibernateImpl;
 import com.gg.hibernate.model.*;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Test;
@@ -84,15 +85,19 @@ public class HibernateTests {
     public void testFetching() {
 
         Session session = HibernateUtils.getSessionFactory().openSession();
-        Pet pet = (Pet)session.get(Pet.class, 1L);
+//        Pet pet = (Pet)session.get(Pet.class, 1L);
+
+        Pet pet = (Pet) session.createQuery("from Pet p where p.id = 7").uniqueResult();
 
         System.out.println("before get visits");
-        pet.getVisits().size();
+//        pet.getVisits().size();
+//
+//        Visit visit = new Visit();
+//        visit.setId(1L);
+//
+//        pet.getVisits().contains(visit);
 
-        Visit visit = new Visit();
-        visit.setId(1L);
-
-        pet.getVisits().contains(visit);
+        session.close();
 
     }
 }

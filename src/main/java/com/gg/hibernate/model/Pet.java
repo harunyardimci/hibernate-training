@@ -32,18 +32,20 @@ public class Pet extends BaseEntity {
 	@Column(name="birth_date")
 	private Date birthDate;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@ForeignKey(name="pet_type_fk")
 	@JoinColumn(name="type_id")
 	private PetType type;
 
 	@ManyToOne
+    @Fetch(FetchMode.SELECT)
 	@JoinColumn(name="owner_id")
 	private Owner owner;
 
 	@OneToMany(orphanRemoval=true, fetch = FetchType.EAGER)
 	@JoinColumn(name="pet_id")
 	@OrderColumn(name="pos_index")
+    @Fetch(FetchMode.SELECT)
 //    @LazyCollection(LazyCollectionOption.EXTRA)
 	private List<Visit> visits = new ArrayList<Visit>();
 	
