@@ -1,6 +1,7 @@
 package com.gg.hibernate.dao;
 
 import java.util.Collection;
+import com.gg.hibernate.model.*;
 
 
 public interface PetClinicDao {

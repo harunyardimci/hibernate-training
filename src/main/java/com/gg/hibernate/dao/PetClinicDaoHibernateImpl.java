@@ -1,6 +1,12 @@
 package com.gg.hibernate.dao;
 
 import com.gg.hibernate.model.*;
+import com.gg.hibernate.model.Pet;
+import com.gg.hibernate.model.Vet;
+import com.gg.hibernate.model.Owner;
+import com.gg.hibernate.model.Visit;
+import com.gg.hibernate.model.Person;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -36,6 +42,8 @@ public class PetClinicDaoHibernateImpl implements PetClinicDao {
     public Owner loadOwner(long id) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         Owner o = (Owner) session.load(Owner.class, id);
+        //Hibernate.initialize(o);
+        o.getId();
         session.close();
         return o;
     }
@@ -75,11 +83,12 @@ public class PetClinicDaoHibernateImpl implements PetClinicDao {
         session.close();
     }
 
+
     @Override
     public void deleteOwner(long ownerId) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        session.delete(session.load(Owner.class,ownerId));
+        session.delete(session.load(Owner.class, ownerId));
         transaction.commit();
         session.close();
     }

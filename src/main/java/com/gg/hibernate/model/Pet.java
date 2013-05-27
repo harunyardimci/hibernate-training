@@ -1,47 +1,69 @@
 package com.gg.hibernate.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Collections;
+
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.OrderColumn;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.ForeignKey;
-
-import javax.persistence.*;
 
 
 @Entity
+@Table(name="pets")
 public class Pet extends BaseEntity {
 	
 	private static final long serialVersionUID = 1L;
 
+	@Column(name="name")
 	private String name;
-
-    @Temporal(TemporalType.DATE)
+	
+	@Temporal(value = TemporalType.DATE)
+	@Column(name="birth_date")
 	private Date birthDate;
 
-    @ManyToOne
-    @ForeignKey(name = "FK_PET_PET_TYPE")
+	@ManyToOne
+	@ForeignKey(name="pet_type_fk")
+	@JoinColumn(name="type_id")
 	private PetType type;
 
-    @ManyToOne
+	@ManyToOne
+	@JoinColumn(name="owner_id")
 	private Owner owner;
 
-    @OneToMany(orphanRemoval = true)
-    @OrderColumn(name = "position")
-    @JoinColumn(name = "PET_ID")
+	@OneToMany(orphanRemoval=true)
+	@JoinColumn(name="pet_id")
+	@OrderColumn(name="pos_index")
 	private List<Visit> visits = new ArrayList<Visit>();
-
-    @ElementCollection
-    @MapKeyColumn
+	
+	@ElementCollection
+	@JoinTable(name="images",joinColumns={@JoinColumn(name="pet_id")})
+	@MapKeyColumn(name="image_name")
 	private Map<String,Image> imagesByName = new HashMap<String, Image>();
 
+	
 	public String getName() {
 		return name;
 	}

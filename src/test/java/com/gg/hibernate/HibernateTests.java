@@ -1,6 +1,8 @@
 package com.gg.hibernate;
 
 import com.gg.hibernate.dao.HibernateUtils;
+import com.gg.hibernate.dao.PetClinicDaoHibernateImpl;
+import com.gg.hibernate.model.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Test;
@@ -51,6 +53,31 @@ public class HibernateTests {
 
         transaction.commit();
         session.close();
+
+    }
+
+    @Test
+    public void testSaveOwner() {
+        PetClinicDaoHibernateImpl petClinicDaoHibernate = new PetClinicDaoHibernateImpl();
+        Owner owner = new Owner();
+        owner.setFirstName("A");
+        owner.setLastName("B");
+
+        Pet pet = new Pet();
+        pet.setName("mypet");
+
+        owner.addPet(pet);
+
+        petClinicDaoHibernate.saveOwner(owner);
+
+    }
+
+    @Test
+    public void testLoadOwner() {
+        PetClinicDaoHibernateImpl petClinicDaoHibernate = new PetClinicDaoHibernateImpl();
+
+        Owner owner = petClinicDaoHibernate.loadOwner(10);
+        System.out.println(owner.getFirstName());
 
     }
 }
