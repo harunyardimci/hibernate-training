@@ -18,7 +18,6 @@ public class HibernateTests {
     @Test
     public void testHibernateSetup() {
         Session session = HibernateUtils.getSessionFactory().openSession();
-        //Transaction transaction = session.beginTransaction();
         Transaction transaction = session.getTransaction();
         transaction.begin();
 

@@ -25,12 +25,15 @@ public class Pet extends BaseEntity {
     @Temporal(TemporalType.DATE)
 	private Date birthDate;
 
+    @ManyToOne
 	private PetType type;
 
     @ManyToOne
 	private Owner owner;
 
-    @Transient
+    @OneToMany(orphanRemoval = true)
+    @OrderColumn(name = "position")
+    @JoinColumn(name = "PET_ID")
 	private List<Visit> visits = new ArrayList<Visit>();
 
     @ElementCollection

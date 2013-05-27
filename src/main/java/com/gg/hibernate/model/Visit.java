@@ -7,9 +7,9 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
+@Entity
 public class Visit extends BaseEntity {
 	
 	private static final long serialVersionUID = 1L;
@@ -19,6 +19,9 @@ public class Visit extends BaseEntity {
 
 	private String description;
 
+
+    @ManyToOne
+    @JoinColumn(name = "PET_ID", insertable = false, updatable = false)
 	private Pet pet;
 
 	private Boolean checkup = false;
