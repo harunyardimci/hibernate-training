@@ -2,12 +2,14 @@ package com.gg.hibernate.model;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Transient;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@PrimaryKeyJoinColumn(name = "OWNER_ID")
 public class Owner extends Person {
 	
 	private static final long serialVersionUID = 1L;
@@ -18,8 +20,8 @@ public class Owner extends Person {
 	private Set<Pet> pets = new HashSet<Pet>();
 	
 	public Set<Pet> getPets() {
-//		return Collections.unmodifiableSet(pets);
-        return pets;
+		return Collections.unmodifiableSet(pets);
+//        return pets;
 	}
 	
 	public void addPet(Pet pet) {

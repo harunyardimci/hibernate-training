@@ -37,6 +37,9 @@ public class HibernateTests {
         Owner o1 = new Owner();
         Owner o2 = new Owner();
 
+        o1.setFirstName("harun");
+        o1.setLastName("yardimci");
+
         Pet pet = new Pet();
 
         Session session = HibernateUtils.getSessionFactory().openSession();
@@ -47,7 +50,7 @@ public class HibernateTests {
 
         session.save(pet);
 
-        o1.getPets().add(pet);
+        o1.addPet(pet);
 
         transaction.commit();
         session.close();
