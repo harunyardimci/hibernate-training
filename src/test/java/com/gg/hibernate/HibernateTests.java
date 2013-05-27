@@ -1,9 +1,6 @@
 package com.gg.hibernate;
 
 import com.gg.hibernate.dao.HibernateUtils;
-import com.gg.hibernate.model.Foo;
-import com.gg.hibernate.model.Owner;
-import com.gg.hibernate.model.Pet;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Test;

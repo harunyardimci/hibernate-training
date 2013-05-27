@@ -2,12 +2,6 @@ package com.gg.hibernate.service;
 
 import java.util.Collection;
 
-import com.gg.hibernate.model.Owner;
-import com.gg.hibernate.model.Person;
-import com.gg.hibernate.model.Pet;
-import com.gg.hibernate.model.Vet;
-import com.gg.hibernate.model.Visit;
-
 
 public interface PetClinicService {
 

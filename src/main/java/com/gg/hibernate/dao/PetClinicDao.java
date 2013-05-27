@@ -2,12 +2,6 @@ package com.gg.hibernate.dao;
 
 import java.util.Collection;
 
-import com.gg.hibernate.model.Visit;
-import com.gg.hibernate.model.Owner;
-import com.gg.hibernate.model.Person;
-import com.gg.hibernate.model.Pet;
-import com.gg.hibernate.model.Vet;
-
 
 public interface PetClinicDao {
 	
