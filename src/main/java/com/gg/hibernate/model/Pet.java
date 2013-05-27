@@ -7,28 +7,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Collections;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapKeyColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
-import javax.persistence.OrderColumn;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.ForeignKey;
+import org.hibernate.annotations.*;
 
 
 @Entity
@@ -53,9 +41,10 @@ public class Pet extends BaseEntity {
 	@JoinColumn(name="owner_id")
 	private Owner owner;
 
-	@OneToMany(orphanRemoval=true)
+	@OneToMany(orphanRemoval=true, fetch = FetchType.EAGER)
 	@JoinColumn(name="pet_id")
 	@OrderColumn(name="pos_index")
+//    @LazyCollection(LazyCollectionOption.EXTRA)
 	private List<Visit> visits = new ArrayList<Visit>();
 	
 	@ElementCollection

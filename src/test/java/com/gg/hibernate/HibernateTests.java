@@ -76,8 +76,23 @@ public class HibernateTests {
     public void testLoadOwner() {
         PetClinicDaoHibernateImpl petClinicDaoHibernate = new PetClinicDaoHibernateImpl();
 
-        Owner owner = petClinicDaoHibernate.loadOwner(10);
+        Owner owner = petClinicDaoHibernate.loadOwner(1000);
         System.out.println(owner.getFirstName());
+    }
+
+    @Test
+    public void testFetching() {
+
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        Pet pet = (Pet)session.get(Pet.class, 1L);
+
+        System.out.println("before get visits");
+        pet.getVisits().size();
+
+        Visit visit = new Visit();
+        visit.setId(1L);
+
+        pet.getVisits().contains(visit);
 
     }
 }
