@@ -6,9 +6,9 @@ import com.gg.hibernate.model.Vet;
 import com.gg.hibernate.model.Owner;
 import com.gg.hibernate.model.Visit;
 import com.gg.hibernate.model.Person;
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.*;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 
 import java.util.Collection;
 import java.util.List;
@@ -40,7 +40,19 @@ public class PetClinicDaoHibernateImpl implements PetClinicDao {
 
     @Override
     public Collection<Visit> findVisits(long petId) {
-        return null;
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(Visit.class).
+                createAlias("pet", "p").
+                createAlias("p.type", "t", JoinType.LEFT_OUTER_JOIN).
+                createAlias("p.imagesByName", "i", JoinType.LEFT_OUTER_JOIN).
+//                createAlias("p.owner", "o").
+//                createAlias("p.pets", "p2").
+                setFetchMode("p.type", FetchMode.JOIN).
+                add(Restrictions.eq("p.id", petId));
+
+        List list = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+        session.close();
+        return list;
     }
 
     @Override

@@ -172,6 +172,17 @@ public class HibernateTests {
         for (Owner owner :owners) {
             System.out.println(owner);
         }
+    }
+
+    @Test
+    public void testFindVisits() {
+
+        Collection<Visit> visits = petClinicDaoHibernate.findVisits(7L);
+
+        for (Visit visit :visits) {
+            System.out.println(visit);
+        }
+
 
     }
 

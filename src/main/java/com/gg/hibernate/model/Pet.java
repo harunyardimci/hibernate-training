@@ -130,6 +130,7 @@ public class Pet extends BaseEntity {
 	}
 	
 	public String toString() {
-		return ToStringBuilder.reflectionToString(this,ToStringStyle.SIMPLE_STYLE);
+//		return ToStringBuilder.reflectionToString(this,ToStringStyle.SIMPLE_STYLE);
+        return "Pet " + getName() + ", visits " + getVisits();
 	}
 }
