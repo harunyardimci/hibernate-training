@@ -2,10 +2,7 @@ package com.gg.hibernate.model;
 
 import java.io.Serializable;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 
 @MappedSuperclass
@@ -17,7 +14,8 @@ public abstract class BaseEntity implements Serializable {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private Long id;
 	
-	private int version;
+	@Version
+    private int version;
 
 	public Long getId() {
 		return id;

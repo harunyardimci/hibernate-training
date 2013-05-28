@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Test;
 
+import java.util.List;
+
 /**
  * User: { "id": "hyardimci", "email":nosqlsolutions@gmail.com"}
  * Date: 5/26/13
@@ -106,6 +108,43 @@ public class HibernateTests {
         PetClinicDaoHibernateImpl petClinicDaoHibernate = new PetClinicDaoHibernateImpl();
         petClinicDaoHibernate.deleteOwner(1000L);
     }
+
+    @Test
+    public void testOptLocking() {
+
+        Session session1 = HibernateUtils.getSessionFactory().openSession();
+        Session session2 = HibernateUtils.getSessionFactory().openSession();
+
+        Transaction tx1 = session1.beginTransaction();
+        Transaction tx2 = session2.beginTransaction();
+
+        Owner o1 = (Owner) session1.get(Owner.class, 7L);
+        Owner o2 = (Owner) session2.get(Owner.class, 7L);
+
+        o1.setLastName("nnnns");
+        o2.setLastName("yyy");
+
+        tx2.commit();
+        System.out.println("after tx2 commit");
+        tx1.commit();
+
+
+    }
+
+
+    @Test
+    public void testHQL() {
+
+        Session session1 = HibernateUtils.getSessionFactory().openSession();
+        List<Owner> list = session1.createQuery("select distinct o from Owner o join fetch o.pets p " +
+                "left join fetch p.visits " +
+                "left join fetch p.imagesByName " +
+                "where p.name like 'L%'").list();
+
+        session1.close();
+        System.out.println(list.get(0).getPets().size());
+    }
+
 
 
 }
