@@ -15,6 +15,7 @@ public class HibernateUtils {
 
     static {
         AnnotationConfiguration cfg = new AnnotationConfiguration();
+        cfg.setInterceptor(new AuditLogInterceptor());
         cfg.configure();
         sessionFactory = cfg.buildSessionFactory();
     }

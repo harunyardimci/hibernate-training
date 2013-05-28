@@ -8,6 +8,7 @@ import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+@Entity
 public class AuditLogRecord extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;

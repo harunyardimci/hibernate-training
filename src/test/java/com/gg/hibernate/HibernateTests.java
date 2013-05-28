@@ -3,6 +3,7 @@ package com.gg.hibernate;
 import com.gg.hibernate.dao.HibernateUtils;
 import com.gg.hibernate.dao.PetClinicDaoHibernateImpl;
 import com.gg.hibernate.model.*;
+import junit.framework.Assert;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.StatelessSessionBuilder;
@@ -182,8 +183,16 @@ public class HibernateTests {
         for (Visit visit :visits) {
             System.out.println(visit);
         }
+    }
 
+    @Test
+    public void testConversation() {
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        session.beginTransaction().commit();
 
+        Session session2 = HibernateUtils.getSessionFactory().getCurrentSession();
+
+        Assert.assertNotSame(session, session2);
     }
 
 }
