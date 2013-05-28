@@ -98,6 +98,14 @@ public class HibernateTests {
 //        pet.getVisits().contains(visit);
 
         session.close();
-
     }
+
+    @Test
+    public void testDelete() {
+
+        PetClinicDaoHibernateImpl petClinicDaoHibernate = new PetClinicDaoHibernateImpl();
+        petClinicDaoHibernate.deleteOwner(1000L);
+    }
+
+
 }

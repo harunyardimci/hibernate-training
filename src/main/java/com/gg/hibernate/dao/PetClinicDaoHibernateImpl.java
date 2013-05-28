@@ -88,7 +88,12 @@ public class PetClinicDaoHibernateImpl implements PetClinicDao {
     public void deleteOwner(long ownerId) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
+
         session.delete(session.load(Owner.class, ownerId));
+//        Owner o = new Owner();
+//        o.setId(ownerId);
+//        session.delete(o);
+
         transaction.commit();
         session.close();
     }
