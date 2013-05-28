@@ -195,4 +195,27 @@ public class HibernateTests {
         Assert.assertNotSame(session, session2);
     }
 
+    @Test
+    public void testCache() {
+
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+
+//        session.createQuery("from PetType").setCacheable(true).list();
+//        System.out.println("before second query");
+//        session2.createQuery("from PetType").setCacheable(true).list();
+
+        Vet v1 = (Vet)session.get(Vet.class, 3L);
+        System.out.println(v1.getSpecialties().size());
+
+        Session session2 = HibernateUtils.getSessionFactory().openSession();
+        session2.beginTransaction();
+
+
+        System.out.println("before second access");
+        Vet v2 = (Vet)session2.get(Vet.class, 3L);
+        v2.getSpecialties().size();
+
+    }
+
 }
