@@ -5,9 +5,12 @@ import com.gg.hibernate.dao.PetClinicDaoHibernateImpl;
 import com.gg.hibernate.model.*;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.StatelessSessionBuilder;
 import org.hibernate.Transaction;
+import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -16,6 +19,14 @@ import java.util.List;
  * Time: 11:30 AM
  */
 public class HibernateTests {
+
+    private PetClinicDaoHibernateImpl petClinicDaoHibernate;
+
+    @Before
+    public void setUp() {
+        petClinicDaoHibernate = new PetClinicDaoHibernateImpl();
+    }
+
 
     @Test
     public void testHibernateSetup() {
@@ -127,10 +138,7 @@ public class HibernateTests {
         tx2.commit();
         System.out.println("after tx2 commit");
         tx1.commit();
-
-
     }
-
 
     @Test
     public void testHQL() {
@@ -146,5 +154,25 @@ public class HibernateTests {
     }
 
 
+    @Test
+    public void testGetVets() {
+
+        Collection<Vet> vets = petClinicDaoHibernate.getVets();
+
+        for (Vet vet :vets) {
+            System.out.println(vet);
+        }
+    }
+
+    @Test
+    public void testFindOwners() {
+
+        Collection<Owner> owners = petClinicDaoHibernate.findOwners("YYYY");
+
+        for (Owner owner :owners) {
+            System.out.println(owner);
+        }
+
+    }
 
 }

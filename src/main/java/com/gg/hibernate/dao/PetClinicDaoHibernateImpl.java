@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * User: { "id": "hyardimci", "email":nosqlsolutions@gmail.com"}
@@ -20,12 +21,21 @@ import java.util.Collection;
 public class PetClinicDaoHibernateImpl implements PetClinicDao {
     @Override
     public Collection<Vet> getVets() {
-        return null;
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        Collection<Vet> result = session.createQuery("from Vet v left join fetch v.specialties").list();
+        session.close();
+        return result;
     }
 
     @Override
     public Collection<Owner> findOwners(String lastName) {
-        return null;
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        Collection<Owner> result = session.createQuery("select distinct o from Owner o " +
+                "left join fetch o.pets p " +
+                "left join fetch p.imagesByName " +
+                "where o.lastName = :lastname").setParameter("lastname", lastName).list();
+        session.close();
+        return result;
     }
 
     @Override
@@ -35,7 +45,10 @@ public class PetClinicDaoHibernateImpl implements PetClinicDao {
 
     @Override
     public Collection<Person> findAllPersons() {
-        return null;
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        Collection<Person> result = session.createQuery("from Person").list();
+        session.close();
+        return result;
     }
 
     @Override
